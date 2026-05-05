@@ -53,6 +53,12 @@ func main() {
 	r.POST("/payments", h.CreatePayment)
 	r.GET("/payments/:payment_id", h.GetPayment)
 
+	// Serve static UI
+	r.Static("/public", "./web")
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/public/")
+	})
+
 	// Start server
 	port := os.Getenv("PORT")
 	if port == "" {
