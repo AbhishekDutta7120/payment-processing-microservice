@@ -16,16 +16,16 @@ const (
 )
 
 type Payment struct {
-	ID              uuid.UUID     `gorm:"type:uuid;primaryKey" json:"id"`
-	UserID          string        `gorm:"not null;index" json:"user_id"`
-	Amount          int64         `gorm:"not null" json:"amount"`
-	Currency        string        `gorm:"not null" json:"currency"`
-	Status          PaymentStatus `gorm:"not null;default:'INITIATED'" json:"status"`
-	IdempotencyKey  string        `gorm:"uniqueIndex;not null" json:"idempotency_key"`
-	RetryCount      int           `gorm:"default:0" json:"retry_count"`
-	FailureReason   string        `json:"failure_reason,omitempty"`
-	CreatedAt       time.Time     `json:"created_at"`
-	UpdatedAt       time.Time     `json:"updated_at"`
+	ID             uuid.UUID     `gorm:"type:uuid;primaryKey" json:"id"`
+	UserID         string        `gorm:"not null;index" json:"user_id"`
+	Amount         int64         `gorm:"not null" json:"amount"`
+	Currency       string        `gorm:"not null" json:"currency"`
+	Status         PaymentStatus `gorm:"not null;default:'INITIATED'" json:"status"`
+	IdempotencyKey string        `gorm:"uniqueIndex;not null" json:"idempotency_key"`
+	RetryCount     int           `gorm:"default:0" json:"retry_count"`
+	FailureReason  string        `json:"failure_reason,omitempty"`
+	CreatedAt      time.Time     `json:"created_at"`
+	UpdatedAt      time.Time     `json:"updated_at"`
 }
 
 func (p *Payment) BeforeCreate(tx *gorm.DB) error {
